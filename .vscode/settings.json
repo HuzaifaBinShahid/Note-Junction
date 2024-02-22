@@ -1,0 +1,7 @@
+{
+    "window.autoDetectColorScheme": true,
+    "window.closeWhenEmpty": true,
+    "window.commandCenter": true,
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.defaultColorDecorators": true
+}
