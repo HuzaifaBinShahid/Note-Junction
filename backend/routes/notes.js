@@ -94,8 +94,9 @@ router.delete('/deletenote/:id', fetchuser, async (req, res) => {
 
     try {
 
-        // Find the Note to be deleted and delete it
+       // Find the Note to be deleted and delete it
         let note = await Notes.findById(req.params.id);
+        console.log(note)
 
         if (!note) {
             return res.status(404).send("Note not Found")
@@ -110,7 +111,8 @@ router.delete('/deletenote/:id', fetchuser, async (req, res) => {
             res.status(404).send("Note not found")
         }
 
-        res.send({"Success" : "Following Note has been deleted" , note:note});
+        res.status(200).send({"Success" : "Following Note has been deleted" , note:note});
+        
 
 
     } catch (error) {
