@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const Login = () => {
+
+const Login = (props) => {
 
 
   let navigate = useNavigate();
@@ -18,7 +19,7 @@ const Login = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-
+         
       },
       body: JSON.stringify({ email: credentials.email, password: credentials.password })
 
@@ -30,9 +31,10 @@ const Login = () => {
     if (json.success) {
       //Save auth-token and redirect to home page
       localStorage.setItem('token', json.authtoken);
+      props.showAlert("LoggedIn Successfully" , "success")
       navigate("/")
     } else {
-      alert("Invalid Credentials")
+      props.showAlert("Inavlid Credentials" , "danger")
     }
 
   }
@@ -41,10 +43,15 @@ const Login = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
   }
 
+  
+
 
 
   return (
-    <div><form onSubmit={handelLogin}>
+    
+    <div>
+      <h2>LOGIN</h2>
+      <form onSubmit={handelLogin}>
       <div className="form-group">
         <label htmlFor="Email">Email address</label>
         <input type="email" className="form-control" value={credentials.email} id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" onChange={onChange} />

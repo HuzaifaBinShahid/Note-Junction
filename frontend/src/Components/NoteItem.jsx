@@ -26,8 +26,8 @@ const NoteItem = (props) => {
                     <h5 className="card-title">{note.title}</h5>
                     <p className="card-text">{note.description}</p>
 
-                    <FontAwesomeIcon onClick={()=>{deleteNote(note._id)}} icon={faTrash}  style={{marginRight: '1rem' , cursor: 'pointer'}}/>
-                    <FontAwesomeIcon onClick = {()=>{updateNote(note)}} icon={faPenToSquare} style={{marginRight: '1rem' , cursor: 'pointer'}}/>
+                    <FontAwesomeIcon onClick={()=>{deleteNote(note._id); props.showAlert("Note Deleted" , "success")}} icon={faTrash}  style={{marginRight: '1rem' , cursor: 'pointer'}}/>
+                    <FontAwesomeIcon onClick = {()=>{updateNote(note)}}  icon={faPenToSquare} style={{marginRight: '1rem' , cursor: 'pointer'}}/>
 
 
 

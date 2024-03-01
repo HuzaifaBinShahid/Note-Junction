@@ -15,6 +15,7 @@ router.post('/createuser', [
     body('email', "Enter a Valid Email").isEmail(),
     body('password', "Password must be alteast 8 characters").isLength({ min: 8 }),
 ], async (req, res) => {
+    let success = false;
 
     // Validation Errors
     const errors = validationResult(req);
@@ -27,7 +28,7 @@ router.post('/createuser', [
 
         let user = await User.findOne({ email: req.body.email });
         if (user) {
-            return res.status(400).json({ error: "User with this Email ALready Exists" });
+            return res.status(400).json({success,  error: "User with this Email ALready Exists" });
         }
 
         // Generate hash and salt for password Security using bcrypt package
@@ -50,7 +51,8 @@ router.post('/createuser', [
         }
 
         const authtoken = jwt.sign(data, JWT_SECRET)
-        res.json({ authtoken });
+        success = true;
+        res.json({success ,  authtoken });
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Occured")
